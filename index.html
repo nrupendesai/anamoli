@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+<title>TODO supply a title</title>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+	integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+	crossorigin="anonymous"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+	crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+	integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
+	crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+	crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="JS/angular.min.js" type="text/javascript"></script>
+<!--         <script src="JS/angular.js" type="text/javascript"></script> -->
+<script src="JS/script.js" type="text/javascript"></script>
+<link href="CSS/reg.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div class="container">
+		
+		<div id="main" ng-app="myApp" ng-controller="Sform" class="right">
+			<form class="form-horizontal" name="regForm" method="POST"
+				onsubmit="return regValidate();">
+				<fieldset>
+					<div class="col-lg-12">
+						<div class="form-group col-lg-3">
+							<div class="col-lg-5">
+								<label class="control-label">First Name: </label>
+							</div>
+							<div class="col-lg-12">
+								<input class="form-control" name="fname" type="text" /><a
+									id="fnameErr"></a>
+							</div>
+						</div>
+						<div class="form-group col-lg-3">
+							<div class="col-lg-12">
+								<label class="control-label">Last Name:</label>
+							</div>
+							<div class="col-lg-12">
+								<input class="form-control" name="lname" type="text" /><a
+									id="lnameErr"></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-12">
+						<div class="form-group col-lg-7 ">
+							<div class="col-lg-10">
+								<label class="control-label">Company Name: </label>
+							</div>
+							<div class="col-lg-10 long-text">
+								<input class="form-control" name="cname" type="text" /><a
+									id="cnameErr"></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-12">
+						<div class="form-group col-lg-7 ">
+							<div class="col-lg-10">
+								<label class="control-label">Work Mail: </label>
+							</div>
+							<div class="col-lg-10 long-text">
+								<input class="form-control" name="email" type="email" /><a
+									id="mailErr"></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-12">
+						<div class="form-group col-lg-7 ">
+							<div class="col-lg-10">
+								<label class="control-label">Phone Number:</label>
+							</div>
+							<div class="col-lg-10 long-text">
+								<input class="form-control" name="number" type="text" /><a
+									id="phnErr"></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-12">
+						<div class="form-group col-lg-3">
+							<div class="col-lg-5">
+								<label class="control-label">Country: </label>
+							</div>
+							<div class="col-lg-12">
+								<select class="form-control" id="country" ng-model="states"
+									ng-options="country for (country, states) in countries">
+									<option value=''>- Please Select -</option>
+								</select> <a id="cntryErr"></a>
+							</div>
+						</div>
+						<div class="form-group col-lg-3">
+							<div class="col-lg-12">
+								<label class="control-label">State:</label>
+							</div>
+							<div class="col-lg-12">
+								<select class="form-control" id="state" ng-disabled="!states"
+									ng-model="suburbs"
+									ng-options="state for (state, suburbs) in states" required>
+									<option value=''>- Please Select -</option>
+								</select> <a id="stateErr"></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-12">
+						<div class="form-group col-lg-3">
+							<div class="col-lg-5">
+								<label class="control-label">Industry:</label>
+							</div>
+							<div class="col-lg-12">
+								<select class="form-control" id="industry" ng-model="industry"
+									ng-options="industry.name for industry in industries">
+									<option value="">- Please Select -</option>
+								</select> <a id="indstryErr"></a>
+							</div>
+						</div>
+						<div class="form-group col-lg-3">
+							<div class="col-lg-12">
+								<label class="control-label">Zip/Postal:</label>
+							</div>
+							<div class="col-lg-12">
+								<input class="form-control" id="zip" type="text"><a
+									id="zipErr"></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-12">
+						<div class="form-group col-lg-3">
+							<div class="col-lg-5">
+								<label class="control-label">Password:</label>
+							</div>
+							<div class="col-lg-12">
+								<input class="form-control" id="pass" type="password"><a
+									id="passErr"></a>
+							</div>
+						</div>
+						<div class="form-group col-lg-3">
+							<div class="col-lg-12">
+								<label class="control-label">Confirm Password:</label>
+							</div>
+							<div class="col-lg-12">
+								<input class="form-control" id="cpass" type="password"><a
+									id="cpassErr"></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-12">
+						<div class="form-group col-lg-12">
+							<div class="col-lg-8">
+								<input type="checkbox" name="chbox" value="ON" /> <label>INTERESTED
+									IN BECOMING A PARTNER</label>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-12">
+						<div class="form-group">
+							<div class="col-lg-5">
+								<span class="help-block text-center"> By clicking
+									Register, you agree to Anamoli's <a href="">Terms of Use</a>
+									and <a href="">Privacy Policy</a>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-lg-10 col-lg-offset-2">
+
+							<button type="submit" class="btn btn-success">Submit</button>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
